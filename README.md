@@ -18,3 +18,9 @@ It returns the numerator (nHat) and denominator (dHat), as well as the fst.
 Note: I tested pairwise_FST_WC.pl against output from vcftools, and they were identical, but of course please confirm for yourself, using the small test data set.
 
 Further note: These are fairly basic, and if i had more time I would rewrite them but they do the job as is.
+
+## how do?
+
+perl scripts/pairwise_FST_WC.pl data/kGenomes_chr14_small.vcf.gz data/MSL_61.txt data/MXL_61.txt 14 results
+
+```there might be some perl module dependnecy issues depending on your local perl installation!```
