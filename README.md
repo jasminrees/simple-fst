@@ -14,3 +14,7 @@ for more flexible down stream analyses e.g. windowed average fst.
 
 pairwise_FST_patterson.pl does the same thing, more or less, but instead uses the fst derivation in Bhatia et al Genome Res. 2013. 23: 1514-1521.
 It returns the numerator (nHat) and denominator (dHat), as well as the fst.
+
+Note: I tested pairwise_FST_WC.pl against output from vcftools, and they were identical, but of course please confirm for yourself, using the small test data set.
+
+Further note: These are fairly basic, and if i had more time I would rewrite them but they do the job as is.
