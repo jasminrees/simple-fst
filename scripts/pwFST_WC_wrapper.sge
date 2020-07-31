@@ -1,35 +1,16 @@
-#$ -S /bin/bash #defines the used shell
-#$ -cwd
-#$ -q all.q
-# load personal profile
-#$ -V
-#$ -m e
-#$ -l h_vmem=2G,virtual_free=2G
-# if you want to run on all local computers as well #$ -l class=*
+#$ -S /bin/bash
 
 # Job Array with jobs corresponding to each chromosome 
 
 #PATHs
+scripts="/path/to/scripts"
 
-a1=( "GBRFemales6" "CHBFemales6" "YRIFemales6")
-
-    a2=( "CHBFemales6" "YRIFemales6")
-    for i in "${a1[@]}"; do echo $i;
-	    for b in "${a2[@]}"; do echo $b;
-				    qsub -t 1:4 /mnt/scratch/josh/1000Genomes/scripts/josh_fst_human.sge ${i} ${b}			    
-				    
-	    done;
-	    # kill first element of a2 to avoid double calculations
-	    a2=("${a2[@]:1}");			    
+pop1=( "GBR" "FIN" "IBS" "TSI" "CEU" "ASW" "ACB" "ESN" "GWD" "LWK" "MSL" "YRI" "CDX" "CHB" "JPT" "KHV" "CHS" "BEB" "GIH" "ITU" "PJL" "STU" "CLM" "MXL" "PEL" "PUR" )
+pop2=( "FIN" "IBS" "TSI" "CEU" "ASW" "ACB" "ESN" "GWD" "LWK" "MSL" "YRI" "CDX" "CHB" "JPT" "KHV" "CHS" "BEB" "GIH" "ITU" "PJL" "STU" "CLM" "MXL" "PEL" "PUR" )
+for a in "${pop1[@]}";
+    do for b in "${pop2[@]}"; 
+    do qsub -t 1:22 ${scripts}/pwFST_WC.sh $a $b                
     done;
-a1=( "GBRFemales18" "CHBFemales18" "YRIFemales18")
-
-    a2=( "CHBFemales18" "YRIFemales18")
-    for i in "${a1[@]}"; do echo $i;
-	    for b in "${a2[@]}"; do echo $b;
-				    qsub -t 1:4 /mnt/scratch/josh/1000Genomes/scripts/josh_fst_human.sge ${i} ${b}			    
-				    
-	    done;
-	    # kill first element of a2 to avoid double calculations
-	    a2=("${a2[@]:1}");			    
-    done;
+    # kill first element of pop2
+    a2=("${a2[@]:1}");
+done;
